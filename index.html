@@ -10,6 +10,339 @@
 
 <style>
 
+/* =========================
+   FINAL DATE ENDING
+========================= */
+
+#formDoneBtn{
+    display:none;
+    position:fixed;
+    bottom:25px;
+    left:50%;
+    transform:translateX(-50%);
+    z-index:5000;
+    background:#ff5fa2;
+    color:white;
+    border:3px solid rgba(255,255,255,.8);
+    box-shadow:0 8px 30px rgba(255,20,147,.35);
+    font-weight:700;
+}
+
+#finale{
+    display:none;
+    position:fixed;
+    inset:0;
+    z-index:9000;
+    overflow:hidden;
+    background:
+        radial-gradient(circle at center,
+        rgba(255,255,255,.25),
+        rgba(255,182,211,.72));
+    backdrop-filter:blur(10px);
+}
+
+/* Mèo */
+
+#finalCat{
+    position:absolute;
+    width:min(65vw,420px);
+    max-height:55vh;
+    object-fit:contain;
+    left:50%;
+    top:50%;
+    transform:
+        translate(-50%,-50%)
+        scale(.1)
+        rotate(-10deg);
+    opacity:0;
+    transition:
+        transform .8s cubic-bezier(.17,.89,.32,1.3),
+        opacity .5s;
+    cursor:pointer;
+    user-select:none;
+    touch-action:none;
+}
+
+#finalCat.cat-in{
+    opacity:1;
+    transform:
+        translate(-50%,-50%)
+        scale(1)
+        rotate(0);
+}
+
+#petText{
+    position:absolute;
+    left:50%;
+    top:72%;
+    transform:translateX(-50%);
+    color:white;
+    font-size:25px;
+    font-weight:700;
+    text-shadow:
+        0 3px 10px rgba(255,20,147,.7);
+    text-align:center;
+    white-space:nowrap;
+}
+
+#petProgress{
+    position:absolute;
+    left:50%;
+    top:79%;
+    transform:translateX(-50%);
+    width:220px;
+    height:10px;
+    border-radius:20px;
+    background:rgba(255,255,255,.35);
+    overflow:hidden;
+}
+
+#petProgressBar{
+    height:100%;
+    width:0%;
+    background:#ff5fa2;
+    transition:.15s;
+}
+
+/* Cục kít */
+
+#poop{
+    display:none;
+    position:absolute;
+    left:50%;
+    top:53%;
+    transform:translate(-50%,-50%) scale(.2);
+    font-size:90px;
+    cursor:pointer;
+    animation:poopPop .7s forwards;
+}
+
+@keyframes poopPop{
+    0%{
+        transform:translate(-50%,-50%) scale(.2) rotate(-20deg);
+        opacity:0;
+    }
+    70%{
+        transform:translate(-50%,-50%) scale(1.2) rotate(8deg);
+    }
+    100%{
+        transform:translate(-50%,-50%) scale(1) rotate(0);
+        opacity:1;
+    }
+}
+
+#poopText{
+    display:none;
+    position:absolute;
+    top:68%;
+    left:50%;
+    transform:translateX(-50%);
+    color:white;
+    font-size:25px;
+    font-weight:700;
+    text-shadow:0 3px 12px #ff1493;
+}
+
+/* Lời nhắn */
+
+#finalMessage{
+    display:none;
+    position:absolute;
+    inset:0;
+    padding:40px 25px;
+    overflow-y:auto;
+    text-align:center;
+    color:white;
+}
+
+.final-line{
+    opacity:0;
+    transform:translateY(20px);
+    font-size:22px;
+    line-height:1.8;
+    margin:25px auto;
+    max-width:750px;
+    text-shadow:
+        0 2px 10px rgba(255,20,147,.6);
+    transition:opacity .8s, transform .8s;
+}
+
+.final-line.show{
+    opacity:1;
+    transform:translateY(0);
+}
+
+/* Hộp nhạc */
+
+#musicBox{
+    display:none;
+    position:absolute;
+    left:50%;
+    bottom:50px;
+    transform:translateX(-50%);
+    font-size:100px;
+    cursor:pointer;
+    animation:musicFloat 2s ease-in-out infinite;
+}
+
+@keyframes musicFloat{
+    0%,100%{
+        transform:translateX(-50%) translateY(0);
+    }
+    50%{
+        transform:translateX(-50%) translateY(-12px);
+    }
+}
+
+/* Puzzle */
+
+#puzzleScreen{
+    display:none;
+    position:absolute;
+    inset:0;
+    padding:25px;
+    overflow:auto;
+    text-align:center;
+}
+
+#puzzleBoard{
+    width:min(90vw,600px);
+    aspect-ratio:1;
+    margin:20px auto;
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:4px;
+    background:white;
+    padding:4px;
+    border-radius:20px;
+    box-shadow:0 10px 40px rgba(255,20,147,.3);
+}
+
+.puzzle-piece{
+    background-image:url("couple.jpg");
+    background-size:300% 300%;
+    cursor:pointer;
+    border-radius:5px;
+    transition:.2s;
+}
+
+.puzzle-piece.selected{
+    transform:scale(.94);
+    box-shadow:0 0 0 4px #ff5fa2;
+}
+
+#puzzleTitle{
+    color:white;
+    font-size:28px;
+    font-weight:700;
+    text-shadow:0 3px 12px #ff1493;
+}
+
+#puzzleHint{
+    color:white;
+    font-size:17px;
+}
+
+/* Ảnh cuối */
+
+#finalPhoto{
+    display:none;
+    position:absolute;
+    inset:0;
+    padding:30px;
+    text-align:center;
+    overflow:auto;
+}
+
+#finalPhoto img{
+    width:min(80vw,550px);
+    max-height:65vh;
+    object-fit:contain;
+    border-radius:25px;
+    opacity:0;
+    transform:scale(.9);
+    animation:photoFade 3s forwards;
+    box-shadow:
+        0 15px 50px rgba(255,20,147,.35);
+}
+
+@keyframes photoFade{
+    to{
+        opacity:1;
+        transform:scale(1);
+    }
+}
+
+#finalQuote{
+    opacity:0;
+    animation:quoteFade 2s 2s forwards;
+    color:white;
+    font-size:25px;
+    font-weight:700;
+    line-height:1.7;
+    text-shadow:0 3px 15px #ff1493;
+    margin-top:20px;
+}
+
+@keyframes quoteFade{
+    to{
+        opacity:1;
+    }
+}
+
+/* Mèo chạy quanh màn hình */
+
+.walking-cat{
+    position:fixed;
+    z-index:9500;
+    font-size:55px;
+    pointer-events:none;
+    animation:catWalk linear forwards;
+}
+
+@keyframes catWalk{
+    from{
+        transform:translateX(-100px);
+    }
+    to{
+        transform:translateX(calc(100vw + 100px));
+    }
+}
+
+/* Ending */
+
+#ultimateEnding{
+    display:none;
+    position:absolute;
+    inset:0;
+    z-index:9999;
+    align-items:center;
+    justify-content:center;
+    flex-direction:column;
+    text-align:center;
+    padding:30px;
+    color:white;
+    background:
+        radial-gradient(circle,
+        rgba(255,105,180,.65),
+        rgba(255,182,211,.92));
+}
+
+#ultimateEnding h1{
+    color:white;
+    font-size:clamp(30px,6vw,60px);
+    text-shadow:
+        0 3px 15px #ff1493,
+        0 0 30px rgba(255,255,255,.8);
+}
+
+#ultimateEnding p{
+    font-size:clamp(18px,3vw,28px);
+    line-height:1.8;
+    margin-top:20px;
+    text-shadow:0 3px 12px #ff1493;
+}
+    
 .message-list {
     margin-top: 20px;
     width: 100%;
@@ -356,6 +689,14 @@ id="formFrame"
 src="https://docs.google.com/forms/d/e/1FAIpQLSdItGGlkrepjd1lv4a9sq_frEPr-CWbvOgXcRV9hDt-dI8gQw/viewform?usp=header">
 </iframe>
 
+<button
+id="formDoneBtn"
+class="final-start-btn"
+onclick="startFinale()"
+>
+💌 Mình điền xong rồi
+</button>
+    
 <audio
 id="bgMusic"
 loop
@@ -559,6 +900,10 @@ document
 .getElementById("formFrame")
 .style.display="block";
 
+document
+.getElementById("formDoneBtn")
+.style.display="block";
+
 document.body.style.overflow="auto";
 
 }
@@ -635,6 +980,403 @@ heart.remove();
 
 },300);
 
+/* =========================
+   FINAL DATE ENDING
+========================= */
+
+let petCount = 0;
+let petting = false;
+let puzzlePieces = [];
+let selectedPiece = null;
+
+
+/* =========================
+   BẮT ĐẦU ENDING
+========================= */
+
+function startFinale(){
+
+    document
+    .getElementById("formFrame")
+    .style.display = "none";
+
+    document
+    .getElementById("formDoneBtn")
+    .style.display = "none";
+
+    document
+    .getElementById("finale")
+    .style.display = "block";
+
+    document.body.style.overflow = "hidden";
+
+    setTimeout(() => {
+
+        document
+        .getElementById("finalCat")
+        .classList.add("cat-in");
+
+    },100);
+
+}
+
+
+/* =========================
+   VUỐT MÈO
+========================= */
+
+const cat =
+document.getElementById("finalCat");
+
+cat.addEventListener("pointermove",function(){
+
+    if(petting) return;
+
+    petting = true;
+
+    petCount++;
+
+    const progress =
+        Math.min(petCount * 4,100);
+
+    document
+    .getElementById("petProgressBar")
+    .style.width =
+        progress + "%";
+
+    setTimeout(()=>{
+        petting=false;
+    },100);
+
+    if(petCount >= 25){
+
+        cat.style.display="none";
+
+        document
+        .getElementById("petText")
+        .style.display="none";
+
+        document
+        .getElementById("petProgress")
+        .style.display="none";
+
+        document
+        .getElementById("poop")
+        .style.display="block";
+
+        document
+        .getElementById("poopText")
+        .style.display="block";
+    }
+
+});
+
+
+/* =========================
+   BẤM KÍT
+========================= */
+
+document
+.getElementById("poop")
+.addEventListener("click",function(){
+
+    document
+    .getElementById("poop")
+    .style.display="none";
+
+    document
+    .getElementById("poopText")
+    .style.display="none";
+
+    document
+    .getElementById("finalMessage")
+    .style.display="block";
+
+    showFinalLines();
+
+});
+
+
+/* =========================
+   HIỆN LỜI NHẮN 5 GIÂY
+========================= */
+
+function showFinalLines(){
+
+    const lines =
+    document.querySelectorAll(".final-line");
+
+    lines.forEach((line,index)=>{
+
+        setTimeout(()=>{
+
+            line.classList.add("show");
+
+        },index * 5000);
+
+    });
+
+    const totalTime =
+        lines.length * 5000;
+
+    setTimeout(()=>{
+
+        document
+        .getElementById("finalMessage")
+        .style.display="none";
+
+        document
+        .getElementById("musicBox")
+        .style.display="block";
+
+    },totalTime);
+
+}
+
+
+/* =========================
+   MỞ PUZZLE
+========================= */
+
+function openPuzzle(){
+
+    document
+    .getElementById("musicBox")
+    .style.display="none";
+
+    document
+    .getElementById("puzzleScreen")
+    .style.display="block";
+
+    createPuzzle();
+
+}
+
+
+/* =========================
+   TẠO PUZZLE 3x3
+========================= */
+
+function createPuzzle(){
+
+    const board =
+    document.getElementById("puzzleBoard");
+
+    board.innerHTML="";
+
+    puzzlePieces =
+        Array.from({length:9},(_,i)=>i);
+
+    /* trộn */
+
+    puzzlePieces.sort(
+        ()=>Math.random()-.5
+    );
+
+    puzzlePieces.forEach((piece,index)=>{
+
+        const div =
+        document.createElement("div");
+
+        div.className="puzzle-piece";
+
+        div.dataset.index=index;
+
+        const row =
+            Math.floor(piece / 3);
+
+        const col =
+            piece % 3;
+
+        div.style.backgroundPosition =
+            `${col * 50}% ${row * 50}%`;
+
+        div.onclick = function(){
+
+            selectPuzzlePiece(div);
+
+        };
+
+        board.appendChild(div);
+
+    });
+
+}
+
+
+/* =========================
+   ĐỔI 2 MẢNH PUZZLE
+========================= */
+
+function selectPuzzlePiece(piece){
+
+    if(!selectedPiece){
+
+        selectedPiece=piece;
+
+        piece.classList.add("selected");
+
+        return;
+    }
+
+    const first =
+        selectedPiece;
+
+    const second =
+        piece;
+
+    const firstBg =
+        first.style.backgroundPosition;
+
+    first.style.backgroundPosition =
+        second.style.backgroundPosition;
+
+    second.style.backgroundPosition =
+        firstBg;
+
+    first.classList.remove("selected");
+
+    selectedPiece=null;
+
+    checkPuzzle();
+
+}
+
+
+/* =========================
+   KIỂM TRA PUZZLE
+========================= */
+
+function checkPuzzle(){
+
+    const pieces =
+        document.querySelectorAll(".puzzle-piece");
+
+    let correct=true;
+
+    pieces.forEach((piece,index)=>{
+
+        const expectedRow =
+            Math.floor(index/3);
+
+        const expectedCol =
+            index%3;
+
+        const expected =
+            `${expectedCol*50}% ${expectedRow*50}%`;
+
+        if(
+            piece.style.backgroundPosition !==
+            expected
+        ){
+            correct=false;
+        }
+
+    });
+
+    if(correct){
+
+        setTimeout(()=>{
+
+            document
+            .getElementById("puzzleScreen")
+            .style.display="none";
+
+            document
+            .getElementById("finalPhoto")
+            .style.display="block";
+
+            setTimeout(
+                startWalkingCats,
+                5000
+            );
+
+        },800);
+
+    }
+
+}
+
+
+/* =========================
+   MÈO ĐI KHẮP MÀN HÌNH
+========================= */
+
+function startWalkingCats(){
+
+    let catsCreated=0;
+
+    const interval =
+    setInterval(()=>{
+
+        createWalkingCat();
+
+        catsCreated++;
+
+        if(catsCreated>=18){
+
+            clearInterval(interval);
+
+            setTimeout(
+                showUltimateEnding,
+                5000
+            );
+
+        }
+
+    },500);
+
+}
+
+
+function createWalkingCat(){
+
+    const cat =
+        document.createElement("div");
+
+    cat.className =
+        "walking-cat";
+
+    cat.innerText =
+        ["🐈","🐈‍⬛","😺","😸","😽"]
+        [Math.floor(Math.random()*5)];
+
+    cat.style.top =
+        Math.random()*85 + "vh";
+
+    cat.style.fontSize =
+        (35 + Math.random()*35)+"px";
+
+    cat.style.animationDuration =
+        (5 + Math.random()*5)+"s";
+
+    document.body.appendChild(cat);
+
+    setTimeout(()=>{
+
+        cat.remove();
+
+    },11000);
+
+}
+
+
+/* =========================
+   ENDING CUỐI
+========================= */
+
+function showUltimateEnding(){
+
+    document
+    .getElementById("finalPhoto")
+    .style.display="none";
+
+    document
+    .getElementById("ultimateEnding")
+    .style.display="flex";
+
+}
+    
 </script>
 
 <div id="popup" style="
@@ -791,6 +1533,147 @@ onclick="openFormAndSwap()"
 </button>
 
 </div>
+
+</div>
+
+<div id="finale">
+
+    <!-- MÈO -->
+
+    <img
+        id="finalCat"
+        src="cat.png"
+        alt="cat"
+    >
+
+    <div id="petText">
+        🥺 Nhấn vuốt ve mình đi...
+    </div>
+
+    <div id="petProgress">
+        <div id="petProgressBar"></div>
+    </div>
+
+
+    <!-- KÍT -->
+
+    <div id="poop">
+        💩
+    </div>
+
+    <div id="poopText">
+        Bấm vào đi 👀
+    </div>
+
+
+    <!-- LỜI NHẮN -->
+
+    <div id="finalMessage">
+
+        <div class="final-line">
+            🌷 <b>Khoan đi đã...</b>
+        </div>
+
+        <div class="final-line">
+            Cậu đã nghe đến đây rồi thì nghe hết bài với mình nhaaa 🎧
+        </div>
+
+        <div class="final-line">
+            🎧 <i>Bài hát này là phần cuối mình muốn dành cho cậu!!!</i>
+        </div>
+
+        <div class="final-line">
+            💗 <b>Điều 1</b><br>
+            Mình đã thật sự rất vui khi cậu dành thời gian xem đến tận đây.
+        </div>
+
+        <div class="final-line">
+            🌷 <b>Điều 2</b><br>
+            Cái web này có thể hơi ngố, nhưng từng chút mình làm đều là vì cậu.
+        </div>
+
+        <div class="final-line">
+            ✨ <b>Điều 3</b><br>
+            Phần còn lại... mình muốn kể cho cậu khi chúng ta gặp nhau.
+        </div>
+
+    </div>
+
+
+    <!-- HỘP NHẠC -->
+
+    <div
+        id="musicBox"
+        onclick="openPuzzle()"
+    >
+        🎵
+    </div>
+
+
+    <!-- PUZZLE -->
+
+    <div id="puzzleScreen">
+
+        <div id="puzzleTitle">
+            🧩 Một mảnh cuối cùng...
+        </div>
+
+        <p id="puzzleHint">
+            Ghép ảnh của tụi mình lại nha 💗
+        </p>
+
+        <div id="puzzleBoard"></div>
+
+    </div>
+
+
+    <!-- ẢNH CUỐI -->
+
+    <div id="finalPhoto">
+
+        <p style="
+            color:white;
+            font-size:25px;
+            font-weight:700;
+            margin-bottom:20px;
+        ">
+            📮 Cậu đã hoàn thành rồi.
+            <br>
+            Vậy nên... mình tặng cậu cái này.
+        </p>
+
+        <img src="couple.jpg">
+
+        <div id="finalQuote">
+            “Phần tiếp theo của câu chuyện này
+            <br>
+            mình muốn viết cùng cậu.”
+        </div>
+
+    </div>
+
+
+    <!-- ENDING -->
+
+    <div id="ultimateEnding">
+
+        <h1>
+            🎀 Hết web rồi.
+        </h1>
+
+        <p>
+            Nhưng date thì chưa đâu nha.
+            <br>
+            <b>Hẹn cậu ngoài đời. ❤️</b>
+        </p>
+
+        <p>
+            “Mong lần tới chúng ta không cần đến
+            <br>
+            một cái web để rủ nhau đi date nữa.” 🌷
+        </p>
+
+    </div>
 
 </div>
 
