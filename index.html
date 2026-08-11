@@ -10,6 +10,182 @@
 
 <style>
 
+.final-note{
+
+    text-align:center;
+
+    margin-top:25px;
+
+    padding-top:20px;
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-style:italic;
+
+    font-size:15px;
+
+    line-height:1.7;
+
+    color:#8b6d76;
+}
+
+.tiny-note{
+
+    display:inline-block;
+
+    margin-top:10px;
+
+    font-family:
+        "Courier New",
+        monospace;
+
+    font-size:18px;
+
+    animation:
+        tinyArrow
+        1.5s
+        ease-in-out
+        infinite;
+}
+
+@keyframes tinyArrow{
+
+    0%,100%{
+        transform:translateY(0);
+    }
+
+    50%{
+        transform:translateY(6px);
+    }
+
+}
+
+.diary-item{
+
+    display:flex;
+
+    gap:22px;
+
+    padding:24px 0;
+
+    border-top:
+        1px solid
+        rgba(130,90,105,.18);
+
+    opacity:0;
+
+    transform:
+        translateY(15px);
+
+    transition:
+        opacity .8s ease,
+        transform .8s ease;
+}
+
+.diary-item.show{
+
+    opacity:1;
+
+    transform:
+        translateY(0);
+}
+
+.diary-number{
+
+    flex:none;
+
+    font-family:
+        "Courier New",
+        monospace;
+
+    font-size:13px;
+
+    letter-spacing:2px;
+
+    color:#c57b95;
+
+    padding-top:4px;
+}
+
+.diary-content{
+    flex:1;
+}
+
+.diary-title{
+
+    font-size:21px;
+
+    font-style:italic;
+
+    color:#5c3c48;
+
+    margin-bottom:8px;
+}
+
+.diary-text{
+
+    font-size:16px;
+
+    line-height:1.8;
+
+    color:#66535a;
+}
+
+#finalCat.cat-fade-out{
+
+    animation:
+        catFadeOut
+        .8s
+        ease
+        forwards;
+
+}
+
+@keyframes catFadeOut{
+
+    0%{
+        opacity:1;
+        transform:scale(1);
+    }
+
+    100%{
+        opacity:0;
+        transform:scale(1.04);
+        filter:blur(6px);
+    }
+
+}
+
+#curtainLeft,
+#curtainRight {
+    position:absolute;
+    top:0;
+    width:50%;
+    height:100%;
+    background:#ff5fa2;
+    z-index:20;
+    transition:transform 1.5s cubic-bezier(.77,0,.18,1);
+}
+
+#curtainLeft {
+    left:0;
+}
+
+#curtainRight {
+    right:0;
+}
+
+#finale.curtain-open #curtainLeft {
+    transform:translateX(-100%);
+}
+
+#finale.curtain-open #curtainRight {
+    transform:translateX(100%);
+}
+
 /* =========================
    FINAL DATE ENDING
 ========================= */
@@ -17,15 +193,33 @@
 #formDoneBtn{
     display:none;
     position:fixed;
+
+    right:25px;
     bottom:25px;
-    left:50%;
-    transform:translateX(-50%);
+
     z-index:5000;
+
     background:#ff5fa2;
     color:white;
-    border:3px solid rgba(255,255,255,.8);
-    box-shadow:0 8px 30px rgba(255,20,147,.35);
+
+    border:2px solid rgba(255,255,255,.85);
+    border-radius:999px;
+
+    padding:14px 22px;
+
+    font-size:16px;
     font-weight:700;
+
+    box-shadow:
+        0 8px 25px rgba(255,20,147,.35);
+
+    cursor:pointer;
+
+    transition:.25s;
+}
+
+#formDoneBtn:hover{
+    transform:scale(1.06);
 }
 
 #finale{
@@ -43,32 +237,242 @@
 
 /* Mèo */
 
+/* =================================
+   MÈO FULL MÀN HÌNH
+================================= */
+
+/* ================================
+   MÈO FULL MÀN HÌNH
+================================ */
+
 #finalCat{
-    position:absolute;
-    width:min(65vw,420px);
-    max-height:55vh;
-    object-fit:contain;
-    left:50%;
-    top:50%;
-    transform:
-        translate(-50%,-50%)
-        scale(.1)
-        rotate(-10deg);
+    position:fixed !important;
+
+    left:0 !important;
+    top:0 !important;
+
+    width:100vw !important;
+    height:100vh !important;
+
+    max-width:none !important;
+    max-height:none !important;
+
+    margin:0 !important;
+    padding:0 !important;
+
+    object-fit:cover;
+
     opacity:0;
+
+    transform:scale(1.08);
+
     transition:
-        transform .8s cubic-bezier(.17,.89,.32,1.3),
-        opacity .5s;
-    cursor:pointer;
+        opacity 1s ease,
+        transform 1.5s ease;
+
+    cursor:grab;
+
     user-select:none;
+    -webkit-user-select:none;
+
     touch-action:none;
+
+    z-index:2;
 }
 
 #finalCat.cat-in{
     opacity:1;
+
+    transform:scale(1);
+}
+
+
+/* =================================
+   RÈM
+================================= */
+
+#curtainLeft,
+#curtainRight{
+
+    position:absolute;
+
+    top:0;
+
+    width:50%;
+    height:100%;
+
+    background:
+        linear-gradient(
+            90deg,
+            #c2185b,
+            #ff5fa2,
+            #d81b60
+        );
+
+    z-index:20;
+
+    transition:
+        transform 1.6s
+        cubic-bezier(.77,0,.18,1);
+}
+
+#curtainLeft{
+    left:0;
+}
+
+#curtainRight{
+    right:0;
+}
+
+
+/* Khi mở rèm */
+
+#finale.curtain-open #curtainLeft{
+    transform:translateX(-100%);
+}
+
+#finale.curtain-open #curtainRight{
+    transform:translateX(100%);
+}
+
+
+/* =========================
+   NÚT BÀN TAY
+========================= */
+
+#petHand{
+
+    position:fixed;
+
+    /* NGAY BỤNG MÈO */
+    left:43%;
+top:64%;
+
+    z-index:100;
+
+    width:auto;
+    height:auto;
+
+    border:none;
+    outline:none;
+    padding:0;
+
+    background:transparent;
+
+    font-size:62px;
+
+    display:none;
+
+    align-items:center;
+    justify-content:center;
+
+    cursor:pointer;
+
+    pointer-events:auto;
+
+    box-shadow:none;
+
+    transform:
+        translate(-50%,-50%);
+
+    animation:
+        handHint 1.2s
+        ease-in-out
+        infinite;
+
+    transition:
+        transform .15s ease;
+}
+
+#petHand:hover{
+
+    background:transparent;
+    box-shadow:none;
+
     transform:
         translate(-50%,-50%)
-        scale(1)
-        rotate(0);
+        scale(1.08);
+}
+#petHand:active{
+
+    background:transparent;
+    box-shadow:none;
+
+    transform:
+        translate(-50%,-50%)
+        scale(.82);
+}
+
+@keyframes handHint{
+
+    0%,100%{
+
+        transform:
+            translate(-50%,-50%)
+            translateY(0);
+
+    }
+
+    50%{
+
+        transform:
+            translate(-50%,-50%)
+            translateY(10px);
+
+    }
+
+}
+
+/* =================================
+   HƯỚNG DẪN
+================================= */
+
+#petInstruction{
+
+    position:absolute;
+
+    z-index:25;
+
+    left:50%;
+    bottom:9%;
+
+    transform:translateX(-50%);
+
+    color:white;
+
+    font-size:24px;
+    font-weight:700;
+
+    text-align:center;
+
+    white-space:nowrap;
+
+    text-shadow:
+        0 3px 12px
+        rgba(255,20,147,.8);
+
+    pointer-events:none;
+
+    animation:
+        instructionFloat
+        1.5s
+        ease-in-out
+        infinite;
+}
+
+@keyframes instructionFloat{
+
+    0%,100%{
+        transform:
+            translateX(-50%)
+            translateY(0);
+    }
+
+    50%{
+        transform:
+            translateX(-50%)
+            translateY(-8px);
+    }
 }
 
 #petText{
@@ -86,15 +490,27 @@
 }
 
 #petProgress{
+
     position:absolute;
+
+    z-index:25;
+
     left:50%;
-    top:79%;
+    bottom:4%;
+
     transform:translateX(-50%);
-    width:220px;
+
+    width:280px;
     height:10px;
+
     border-radius:20px;
-    background:rgba(255,255,255,.35);
+
+    background:
+        rgba(255,255,255,.35);
+
     overflow:hidden;
+
+    backdrop-filter:blur(5px);
 }
 
 #petProgressBar{
@@ -104,31 +520,175 @@
     transition:.15s;
 }
 
-/* Cục kít */
+/* =========================
+   NÚT CỤC CỨT
+========================= */
 
 #poop{
-    display:none;
     position:absolute;
-    left:50%;
-    top:53%;
-    transform:translate(-50%,-50%) scale(.2);
+
+    /* vị trí cục cứt: gần đuôi mèo */
+    left:31%;
+    top:76%;
+
+    z-index:200;
+
+    border:none;
+    outline:none;
+    padding:0;
+
+    background:transparent;
+
     font-size:90px;
+    line-height:1;
+
+    display:none;
+
     cursor:pointer;
-    animation:poopPop .7s forwards;
+
+    opacity:0;
+
+    transform:
+        translate(-50%,50%)
+        scale(.15);
+
+    box-shadow:none;
+
+    pointer-events:auto;
+z-index: 99999 !important;
+pointer-events: auto !important;
+cursor: pointer !important;
+position: fixed !important;
 }
 
-@keyframes poopPop{
+#poop:hover{
+
+    background:transparent;
+
+    transform:
+        translate(-50%,0)
+        scale(1.08);
+
+}
+
+
+/* lúc bấm */
+
+#poop:active{
+
+    background:transparent;
+
+    transform:
+        translate(-50%,0)
+        scale(.82);
+
+}
+
+
+/* =========================
+   CỨT LÒI RA
+========================= */
+
+#poop.poop-show{
+    display:block;
+
+    animation:
+        poopComeOut
+        .9s
+        cubic-bezier(.17,.89,.32,1.3)
+        forwards;
+}
+
+@keyframes poopComeOut{
+
     0%{
-        transform:translate(-50%,-50%) scale(.2) rotate(-20deg);
         opacity:0;
+
+        transform:
+            translate(-50%,50%)
+            scale(.15);
     }
-    70%{
-        transform:translate(-50%,-50%) scale(1.2) rotate(8deg);
-    }
-    100%{
-        transform:translate(-50%,-50%) scale(1) rotate(0);
+
+    45%{
         opacity:1;
+
+        transform:
+            translate(-50%,-12%)
+            scale(1.15);
     }
+
+    70%{
+        transform:
+            translate(-50%,4%)
+            scale(.95);
+    }
+
+    100%{
+        opacity:1;
+
+        transform:
+            translate(-50%,0)
+            scale(1);
+    }
+}
+
+#poop.poop-clicked{
+
+    animation:
+        poopClicked
+        .7s
+        ease-in-out
+        forwards;
+
+}
+
+
+@keyframes poopClicked{
+
+    0%{
+        transform:
+            translate(-50%,0)
+            scale(1)
+            rotate(0deg);
+    }
+
+    15%{
+        transform:
+            translate(-50%,0)
+            scale(1.15)
+            rotate(-8deg);
+    }
+
+    30%{
+        transform:
+            translate(-50%,0)
+            scale(1.1)
+            rotate(8deg);
+    }
+
+    45%{
+        transform:
+            translate(-50%,0)
+            scale(1.05)
+            rotate(-6deg);
+    }
+
+    60%{
+        transform:
+            translate(-50%,0)
+            scale(1)
+            rotate(5deg);
+    }
+
+    100%{
+        opacity:0;
+
+        transform:
+            translate(-50%,20px)
+            scale(.2)
+            rotate(0deg);
+    }
+
 }
 
 #poopText{
@@ -146,30 +706,112 @@
 /* Lời nhắn */
 
 #finalMessage{
-    display:none;
-    position:absolute;
-    inset:0;
-    padding:40px 25px;
+    position:fixed;
+
+    left:50%;
+    top:50%;
+
+    transform:translate(-50%,-50%);
+
+    width:min(680px,88vw);
+    max-height:78vh;
+
     overflow-y:auto;
-    text-align:center;
-    color:white;
+
+    box-sizing:border-box;
+
+    padding:45px 50px;
+
+    /* nền giấy hồng trong suốt */
+    background:
+        rgba(255,247,248,.82);
+
+    backdrop-filter:blur(18px);
+    -webkit-backdrop-filter:blur(18px);
+
+    border:
+        1px solid
+        rgba(255,255,255,.85);
+
+    border-radius:4px;
+
+    box-shadow:
+        0 25px 70px
+        rgba(120,60,80,.22);
+
+    color:#49383f;
+
+    text-align:left;
+
+   font-family:
+    Arial,
+    "Segoe UI",
+    sans-serif;
+
+    opacity:0;
+    visibility:hidden;
+
+    z-index:9990;
+
+    /* thanh cuộn ẩn */
+    scrollbar-width:none;
+}
+
+#finalMessage::-webkit-scrollbar{
+    display:none;
 }
 
 .final-line{
     opacity:0;
-    transform:translateY(20px);
-    font-size:22px;
-    line-height:1.8;
-    margin:25px auto;
-    max-width:750px;
-    text-shadow:
-        0 2px 10px rgba(255,20,147,.6);
-    transition:opacity .8s, transform .8s;
+    transform:translateY(15px);
+    transition:opacity .8s ease, transform .8s ease;
 }
 
 .final-line.show{
     opacity:1;
     transform:translateY(0);
+}
+
+/* =========================
+   CHUYỂN SANG LỜI NHẮN
+========================= */
+
+#finalMessage.message-show{
+
+    animation:
+        messageAppear
+        1.2s
+        ease forwards;
+
+}
+
+
+@keyframes messageAppear{
+
+    0%{
+
+        opacity:0;
+
+        transform:
+            translateY(30px)
+            scale(.96);
+
+        filter:blur(8px);
+
+    }
+
+    100%{
+
+        opacity:1;
+
+        transform:
+            translateY(0)
+            scale(1);
+
+        filter:blur(0);
+
+    }
+
 }
 
 /* Hộp nhạc */
@@ -638,6 +1280,134 @@ transform:translateY(110vh);
 }
 }
 
+.indie-header{
+    text-align:center;
+    margin-bottom:25px;
+}
+
+.indie-location{
+    font-family:
+        "Courier New",
+        monospace;
+
+    font-size:11px;
+
+    letter-spacing:4px;
+
+    color:#a67887;
+
+    margin-bottom:12px;
+}
+
+.indie-line{
+    width:100%;
+
+    height:1px;
+
+    background:
+        rgba(150,100,115,.25);
+
+    margin-bottom:18px;
+}
+
+.indie-stamp{
+    font-size:32px;
+
+    opacity:.85;
+}
+
+.final-title{
+    text-align:center;
+
+     font-family:
+        "Segoe UI",
+        Arial,
+        sans-serif;
+
+    font-size:36px;
+
+    font-weight:normal;
+
+    font-style:italic;
+
+    color:#5b3b47;
+
+    margin-bottom:6px;
+}
+
+.final-subtitle{
+    text-align:center;
+
+    font-family:
+        "Courier New",
+        monospace;
+
+    font-size:11px;
+
+    letter-spacing:2px;
+
+    text-transform:uppercase;
+
+    color:#a98691;
+
+    margin-bottom:35px;
+}
+
+#goPuzzleBtn{
+
+    display:none;
+
+    width:max-content;
+
+    margin:35px auto 5px;
+
+    padding:12px 22px;
+
+    border-radius:30px;
+
+    background:
+        rgba(255,255,255,.75);
+
+    border:
+        1px solid
+        rgba(255,105,180,.35);
+
+    color:#d85b89;
+
+    font-family:
+        "Segoe UI",
+        Arial,
+        sans-serif;
+
+    font-size:15px;
+
+    font-weight:600;
+
+    cursor:pointer;
+
+    box-shadow:
+        0 8px 25px
+        rgba(255,105,180,.18);
+
+    transition:
+        transform .25s ease,
+        box-shadow .25s ease;
+}
+
+#goPuzzleBtn:hover{
+
+    transform:
+        translateY(-3px);
+
+    box-shadow:
+        0 12px 30px
+        rgba(255,105,180,.28);
+}
+
+#goPuzzleBtn span{
+    margin-left:7px;
+}
+
 </style>
 </head>
 
@@ -729,7 +1499,7 @@ const lines = [
 
 "Vậy nên...",
 
-"Cậu có muốn đi date với mình trong tuần này không? ☕💖"
+
 
 ];
 
@@ -944,6 +1714,8 @@ closeSecondPopup;
 
 }
 
+
+
 function playMusic(){
 
 const music = document.getElementById("bgMusic");
@@ -984,8 +1756,7 @@ heart.remove();
    FINAL DATE ENDING
 ========================= */
 
-let petCount = 0;
-let petting = false;
+
 let puzzlePieces = [];
 let selectedPiece = null;
 
@@ -997,104 +1768,195 @@ let selectedPiece = null;
 function startFinale(){
 
     document
-    .getElementById("formFrame")
-    .style.display = "none";
+        .getElementById("formFrame")
+        .style.display = "none";
 
     document
-    .getElementById("formDoneBtn")
-    .style.display = "none";
+        .getElementById("formDoneBtn")
+        .style.display = "none";
 
-    document
-    .getElementById("finale")
-    .style.display = "block";
 
-    document.body.style.overflow = "hidden";
+    const finale =
+        document.getElementById("finale");
+
+    finale.style.display = "block";
+
+    document.body.style.overflow =
+        "hidden";
+
+
+    /* RÈM ĐÓNG */
+
+    finale.classList.remove(
+        "curtain-open"
+    );
+
+
+    /* MỞ RÈM */
+
+    setTimeout(() => {
+
+        finale.classList.add(
+            "curtain-open"
+        );
+
+    },300);
+
+
+    /* MÈO HIỆN */
 
     setTimeout(() => {
 
         document
-        .getElementById("finalCat")
-        .classList.add("cat-in");
+            .getElementById("finalCat")
+            .classList.add("cat-in");
 
-    },100);
+    },700);
+
+
+    /* =========================
+       BÀN TAY + 10 LẦN CLICK
+    ========================= */
+
+    setTimeout(() => {
+
+        const petHandButton =
+            document.getElementById(
+                "petHand"
+            );
+
+        const petInstructionText =
+            document.getElementById(
+                "petInstruction"
+            );
+
+        const petBar =
+            document.getElementById(
+                "petProgressBar"
+            );
+
+
+        petHandButton.style.display =
+            "flex";
+
+
+        let petClicks = 0;
+
+        const PET_MAX = 10;
+
+
+        petHandButton.onclick =
+            function(){
+
+                petClicks++;
+
+
+                /* PROGRESS */
+
+                const progress =
+                    (petClicks / PET_MAX)
+                    * 100;
+
+                petBar.style.width =
+                    progress + "%";
+
+
+                /* HIỆU ỨNG NHẤN */
+
+                petHandButton.style.transform =
+                    "translate(-50%,-50%) scale(.82)";
+
+
+                setTimeout(() => {
+
+                    petHandButton.style.transform =
+                        "translate(-50%,-50%) scale(1)";
+
+                },150);
+
+
+                /* CHỮ */
+
+                if(petClicks < 4){
+
+                    petInstructionText.innerText =
+                        "Aaa... 🥺💗";
+
+                }
+
+                else if(petClicks < 7){
+
+                    petInstructionText.innerText =
+                        "Đúng rồi đó...🥺";
+
+                }
+
+                else if(petClicks < 10){
+
+                    petInstructionText.innerText =
+                        "Thêm chút nữa thôi... 💗";
+
+                }
+
+
+                /* =====================
+                   ĐỦ 10 LẦN
+                ===================== */
+
+                if(petClicks >= PET_MAX){
+
+                    petHandButton.disabled =
+                        true;
+
+
+                    petHandButton.style.display =
+                        "none";
+
+
+                    petInstructionText.innerText =
+                        "Ngoan lắm... 💗";
+
+
+                    setTimeout(() => {
+
+                        petInstructionText.style.display =
+                            "none";
+
+
+                        document
+                            .getElementById(
+                                "petProgress"
+                            )
+                            .style.display =
+                            "none";
+
+
+                        const poop =
+        document.getElementById("poop");
+
+    poop.classList.add(
+        "poop-show"
+    );
+
+
+                        document
+                            .getElementById(
+                                "poopText"
+                            )
+                            .style.display =
+                            "block";
+
+                    },1200);
+
+                }
+
+            };
+
+    },1800);
 
 }
 
 
-/* =========================
-   VUỐT MÈO
-========================= */
-
-const cat =
-document.getElementById("finalCat");
-
-cat.addEventListener("pointermove",function(){
-
-    if(petting) return;
-
-    petting = true;
-
-    petCount++;
-
-    const progress =
-        Math.min(petCount * 4,100);
-
-    document
-    .getElementById("petProgressBar")
-    .style.width =
-        progress + "%";
-
-    setTimeout(()=>{
-        petting=false;
-    },100);
-
-    if(petCount >= 25){
-
-        cat.style.display="none";
-
-        document
-        .getElementById("petText")
-        .style.display="none";
-
-        document
-        .getElementById("petProgress")
-        .style.display="none";
-
-        document
-        .getElementById("poop")
-        .style.display="block";
-
-        document
-        .getElementById("poopText")
-        .style.display="block";
-    }
-
-});
-
-
-/* =========================
-   BẤM KÍT
-========================= */
-
-document
-.getElementById("poop")
-.addEventListener("click",function(){
-
-    document
-    .getElementById("poop")
-    .style.display="none";
-
-    document
-    .getElementById("poopText")
-    .style.display="none";
-
-    document
-    .getElementById("finalMessage")
-    .style.display="block";
-
-    showFinalLines();
-
-});
 
 
 /* =========================
@@ -1104,32 +1966,39 @@ document
 function showFinalLines(){
 
     const lines =
-    document.querySelectorAll(".final-line");
+        document.querySelectorAll(
+            "#finalMessage .final-line"
+        );
 
-    lines.forEach((line,index)=>{
+    lines.forEach(function(line, index){
 
-        setTimeout(()=>{
+        setTimeout(function(){
 
             line.classList.add("show");
 
-        },index * 5000);
+        }, index * 3000);
 
     });
 
+
     const totalTime =
-        lines.length * 5000;
+        lines.length * 3000;
 
-    setTimeout(()=>{
 
-        document
-        .getElementById("finalMessage")
-        .style.display="none";
+    setTimeout(function(){
 
-        document
-        .getElementById("musicBox")
-        .style.display="block";
+        const btn =
+            document.getElementById(
+                "goPuzzleBtn"
+            );
 
-    },totalTime);
+        if(btn){
+
+            btn.style.display = "flex";
+
+        }
+
+    }, totalTime);
 
 }
 
@@ -1376,7 +2245,67 @@ function showUltimateEnding(){
     .style.display="flex";
 
 }
+
+function handlePoopClick(){
+
+    const poop =
+        document.getElementById("poop");
+
+    const poopText =
+        document.getElementById("poopText");
+
+    const cat =
+        document.getElementById("finalCat");
+
+    const message =
+        document.getElementById("finalMessage");
+
+
+    /* 💩 rung */
+
+    poop.classList.add("poop-clicked");
+
+
+    /* đợi rung xong */
+
+    setTimeout(function(){
+
+        poop.style.display = "none";
+
+        if(poopText){
+            poopText.style.display = "none";
+        }
+
+
+        /* 🐈 mèo biến mất */
+
+        cat.classList.add("cat-fade-out");
+
+
+        setTimeout(function(){
+
+            cat.style.display = "none";
+
+
+            /* 🌷 hiện lời nhắn */
+
+            message.style.display = "block";
+            message.style.opacity = "1";
+            message.style.visibility = "visible";
+
+
+            /* từng câu cách nhau 5 giây */
+
+            showFinalLines();
+
+        },900);
+
+    },700);
+}
     
+function goToPuzzle() {
+    window.location.href = "puzzle.html";
+}
 </script>
 
 <div id="popup" style="
@@ -1420,7 +2349,7 @@ box-shadow:0 10px 25px rgba(255,105,180,.25);
 Mình biết màaaa 🌷
 </p>
 
-<p style="white-space: nowrap;ar
+<p style="white-space: nowrap;
 font-size:21px;
 font-weight:700;
 color:#fff;
@@ -1538,66 +2467,143 @@ onclick="openFormAndSwap()"
 
 <div id="finale">
 
-    <!-- MÈO -->
+<div id="curtainLeft"></div>
+<div id="curtainRight"></div>
 
-    <img
-        id="finalCat"
-        src="cat.png"
-        alt="cat"
-    >
+<!-- MÈO NGỦ FULL MÀN HÌNH -->
 
-    <div id="petText">
-        🥺 Nhấn vuốt ve mình đi...
-    </div>
+<img
+    id="finalCat"
+    src="cat-sleep.gif"
+    alt="cat sleeping"
+>
+
+<!-- BÀN TAY VUỐT MÈO -->
+<button id="petHand" type="button" aria-label="Vuốt mèo">
+    🖐️
+</button>
+
+<div id="petInstruction">
+    Nhấn vào bàn tay để vuốt mình... 🥺
+</div>
 
     <div id="petProgress">
         <div id="petProgressBar"></div>
     </div>
 
 
-    <!-- KÍT -->
+<!-- KÍT -->
 
-    <div id="poop">
-        💩
-    </div>
+<button
+    id="poop"
+    type="button"
+    onclick="handlePoopClick()"
+>
+    💩
+</button>
 
-    <div id="poopText">
-        Bấm vào đi 👀
-    </div>
-
+<div id="poopText">
+    Bấm vào đi 👀
+</div>
 
     <!-- LỜI NHẮN -->
 
     <div id="finalMessage">
+<div class="indie-header">
 
-        <div class="final-line">
-            🌷 <b>Khoan đi đã...</b>
+    <div class="indie-location">
+        Đà Nẵng · knoccc
+    </div>
+
+    <div class="indie-line"></div>
+
+    <div class="indie-stamp">
+        🌷
+    </div>
+
+</div>
+
+        <div class="final-line final-title">
+    Khoan đi đã...
+</div>
+
+        <div class="final-line final-subtitle">
+    Cậu đã nghe đến đây rồi thì nghe hết bài với mình nhaaa
+    <br>
+    🎧 <i>Bài hát này là phần cuối mình muốn dành cho cậu!!!</i>
+</div>
+
+        <div class="final-line diary-item">
+
+    <div class="diary-number">
+        01
+    </div>
+
+    <div class="diary-content">
+
+        <div class="diary-title">
+            Mình thật sự rất vui.
         </div>
 
-        <div class="final-line">
-            Cậu đã nghe đến đây rồi thì nghe hết bài với mình nhaaa 🎧
-        </div>
-
-        <div class="final-line">
-            🎧 <i>Bài hát này là phần cuối mình muốn dành cho cậu!!!</i>
-        </div>
-
-        <div class="final-line">
-            💗 <b>Điều 1</b><br>
-            Mình đã thật sự rất vui khi cậu dành thời gian xem đến tận đây.
-        </div>
-
-        <div class="final-line">
-            🌷 <b>Điều 2</b><br>
-            Cái web này có thể hơi ngố, nhưng từng chút mình làm đều là vì cậu.
-        </div>
-
-        <div class="final-line">
-            ✨ <b>Điều 3</b><br>
-            Phần còn lại... mình muốn kể cho cậu khi chúng ta gặp nhau.
+        <div class="diary-text">
+            khi cậu
+            dành thời gian xem đến tận đây.
         </div>
 
     </div>
+
+</div>
+
+
+<div class="final-line diary-item">
+
+    <div class="diary-number">
+        02
+    </div>
+
+    <div class="diary-content">
+
+        <div class="diary-title">
+            Một chút ngố ngố.
+        </div>
+
+        <div class="diary-text">
+            
+            nhưng từng chút mình làm đều là vì cậu.
+        </div>
+
+    </div>
+
+</div>
+
+
+<div class="final-line diary-item">
+
+    <div class="diary-number">
+        03
+    </div>
+
+    <div class="diary-content">
+
+        <div class="diary-title">
+            Phần còn lại...
+        </div>
+
+        <div class="diary-text">
+            Phần còn lại mình muốn kể cho cậu
+            khi chúng ta gặp nhau.
+        </div>
+
+    </div>
+
+</div>
+<div
+    id="goPuzzleBtn"
+    onclick="openPuzzle()"
+>
+    🎵
+    <span>Nghe tiếp cùng mình</span>
+</div>
 
 
     <!-- HỘP NHẠC -->
