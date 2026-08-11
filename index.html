@@ -1,0 +1,798 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>💌 Thư mời đặc biệt 💌</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+<style>
+
+.message-list {
+    margin-top: 20px;
+    width: 100%;
+    padding: 0 30px;
+    box-sizing: border-box;
+}
+
+.message-line {
+    display: flex;
+    align-items: flex-start;
+    width: 100%;
+    margin: 16px 0;
+}
+
+.heart-icon {
+    flex: 0 0 38px;
+    color: #ff4f9a;
+    font-size: 22px;
+    line-height: 1.9;
+}
+
+.message-line p {
+    flex: 1;
+    margin: 0;
+    color: white;
+    line-height: 1.9;
+    text-align: justify;
+}
+
+text-align: justify;
+text-justify: inter-word;
+
+.popup-scroll {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+.popup-scroll::-webkit-scrollbar {
+    display: none;
+}
+
+/* ===== GLASSMORPHISM POPUP ===== */
+
+.popup-glass {
+    background: rgba(255, 105, 180, 0.28);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+
+    border: 1px solid rgba(255, 255, 255, 0.45);
+
+    box-shadow:
+        0 15px 50px rgba(255, 20, 147, 0.25),
+        inset 0 1px 0 rgba(255,255,255,.25);
+
+    color: white;
+}
+
+/* Chữ bên trong popup */
+.popup-glass p {
+    color: white;
+}
+
+/* Tiêu đề popup */
+.popup-glass h2 {
+    color: #fff !important;
+    text-shadow: 0 2px 8px rgba(255, 20, 147, .5);
+}
+
+/* Ẩn thanh cuộn nhưng vẫn cho cuộn */
+.popup-scroll {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+.popup-scroll::-webkit-scrollbar {
+    display: none;
+}
+
+/* Dòng READY nổi bật */
+.ready-text {
+    text-align: center;
+    color: #fff !important;
+    font-size: 25px !important;
+    font-weight: 700;
+    margin: 25px 0 10px;
+    text-shadow:
+        0 0 8px rgba(255,255,255,.8),
+        0 0 18px rgba(255,105,180,.9);
+}
+
+#typing{
+
+display:flex;
+
+flex-direction:column;
+
+align-items:flex-start;
+
+max-height:320px;
+
+overflow-y:auto;
+
+padding-right:8px;
+
+scroll-behavior:smooth;
+
+}
+
+.message{
+
+background:white;
+
+padding:12px 18px;
+
+border-radius:20px 20px 20px 5px;
+
+margin:10px 0;
+
+width:fit-content;
+
+max-width:75%;
+
+text-align:left;
+
+box-shadow:0 5px 15px rgba(0,0,0,.08);
+
+animation:messagePop .4s ease;
+
+}
+
+@keyframes messagePop{
+from{
+opacity:0;
+transform:translateY(15px);
+}
+to{
+opacity:1;
+transform:translateY(0);
+}
+}
+
+.btns{
+display:none;
+margin-top:35px;
+justify-content:center;
+align-items:center;
+gap:15px;
+}
+
+.no{
+position:relative;
+background:white;
+color:#ff5fa2;
+border:2px solid #ffb6d3;
+}
+
+button{
+outline:none;
+}
+
+button:focus{
+outline:none;
+box-shadow:none;
+}
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+body{
+background:linear-gradient(
+135deg,
+#ffd6e7,
+#ffe8f3,
+#fff4fa
+);
+
+overflow:hidden;
+height:100vh;
+
+display:flex;
+justify-content:center;
+align-items:center;
+}
+
+.card{
+width:90%;
+max-width:850px;
+
+background:rgba(255,255,255,.55);
+
+backdrop-filter:blur(15px);
+
+padding:50px;
+
+border-radius:30px;
+
+text-align:center;
+
+box-shadow:0 15px 50px rgba(255,105,180,.15);
+
+z-index:10;
+}
+
+h1{
+color:#ff5fa2;
+margin-bottom:20px;
+font-size:40px;
+}
+
+#typing p{
+margin:12px 0;
+font-size:22px;
+color:#444;
+animation:fadeIn .6s ease;
+}
+
+@keyframes fadeIn{
+from{
+opacity:0;
+transform:translateY(10px);
+}
+to{
+opacity:1;
+transform:translateY(0);
+}
+}
+
+.btns{
+display:none;
+margin-top:35px;
+
+justify-content:center;
+align-items:center;
+gap:15px;
+}
+
+button{
+padding:15px 28px;
+border:none;
+border-radius:999px;
+cursor:pointer;
+font-size:18px;
+transition:.25s;
+}
+
+.yes{
+background:#ff5fa2;
+color:white;
+}
+
+.yes:hover{
+transform:scale(1.08);
+}
+
+.no{
+background:white;
+color:#ff5fa2;
+border:2px solid #ffb6d3;
+position:relative;
+}
+
+.music{
+margin-top:20px;
+background:white;
+color:#ff5fa2;
+border:2px solid #ffb6d3;
+}
+
+iframe{
+display:none;
+width:100%;
+height:100vh;
+border:none;
+}
+
+.heart{
+position:fixed;
+top:-30px;
+pointer-events:none;
+animation:fall linear forwards;
+}
+
+@keyframes fall{
+from{
+transform:translateY(-20px);
+}
+to{
+transform:translateY(110vh);
+}
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="card" id="welcome">
+
+<h1>💌 Thư mời đặc biệt 💌</h1>
+<div id="typing"></div>
+
+<div id="continueBox" style="display:none;margin-top:25px;">
+<button class="yes" onclick="showQuestionPage()">
+✨ Tiếp tục
+</button>
+</div>
+
+<div id="questionPage" style="display:none;">
+
+<h2 style="color:#ff5fa2;margin-top:20px;">
+Vậy nên...
+</h2>
+
+<p style="font-size:24px;margin:20px 0;">
+Cậu có muốn đi date với mình trong tuần này không? ☕💖
+</p>
+
+<div class="btns" id="realButtons">
+
+<button class="yes" onclick="openPopup()">
+💖 Dạ có
+</button>
+
+<button class="no" id="noBtn">
+🙃 Không
+</button>
+
+</div>
+
+</div>
+
+<button class="music" onclick="playMusic()">
+🎧 Nhạc nền nè
+</button>
+
+</div>
+
+<iframe
+id="formFrame"
+src="https://docs.google.com/forms/d/e/1FAIpQLSdItGGlkrepjd1lv4a9sq_frEPr-CWbvOgXcRV9hDt-dI8gQw/viewform?embedded=true">
+</iframe>
+
+<audio
+id="bgMusic"
+loop
+preload="auto"
+>
+<source src="music.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+
+const lines = [
+
+"Hey Mquan 🌷",
+
+"Mình đã suy nghĩ khá lâu trước khi làm cái này đó!!!",
+
+"Thật ra mình có một câu hỏi nho nhỏ muốn hỏi cậu...",
+
+"Đừng lo, không phải về bài tập đâu???",
+
+"Cũng không phải về công việc hay những chuyện đau đầu khác~~~",
+
+"Lại càng không phải mấy câu hỏi triết lý về tương lai nữaaaa",
+
+"Chỉ là...",
+
+"Mình đang muốn dành thêm thời gian với cậu một chút...",
+
+"Muốn cùng cậu đi đâu đó, ăn gì đó ngon ngon, nghe vài bài nhạc hay hay và tạo thêm một kỷ niệm mớiiii",
+
+"Vậy nên...",
+
+"Cậu có muốn đi date với mình trong tuần này không? ☕💖"
+
+];
+
+let i = 0;
+
+let fastMode = false;
+
+function showNextLine(){
+
+if(i < lines.length){
+
+const msg =
+document.createElement("div");
+
+msg.classList.add("message");
+
+msg.innerText =
+lines[i];
+
+document
+.getElementById("typing")
+.appendChild(msg);
+
+const typingBox =
+document.getElementById("typing");
+
+typingBox.scrollTop =
+typingBox.scrollHeight;
+
+i++;
+
+setTimeout(
+showNextLine,
+fastMode ? 150 : 1800
+);
+
+}else{
+
+document
+.getElementById("continueBox")
+.style.display="block";
+
+}
+}
+
+showNextLine();
+
+document.addEventListener("click",()=>{
+
+if(i < lines.length){
+
+fastMode = true;
+
+}
+
+});
+
+const texts=[
+
+"Ơ kìa 🥺",
+
+"Bấm nhầm rồi đúng không 🌷",
+
+"Chọn lại nhaaaa 💖",
+
+"Không được đâu 😌",
+
+"Có mỗi một đáp án thôi á 😭",
+
+"Thử lại đi mà 💕",
+
+"Mình biết cậu sẽ chọn Có 😚"
+
+];
+
+let count=0;
+
+const noBtn =
+document.getElementById("noBtn");
+
+function escapeButton(){
+
+const current =
+parseInt(noBtn.dataset.pos || 0);
+
+const next =
+current === 0 ? 35 : 0;
+
+noBtn.style.transform =
+`translateX(${next}px)`;
+
+noBtn.dataset.pos = next;
+
+noBtn.innerText =
+texts[count % texts.length];
+
+count++;
+
+}
+
+noBtn.addEventListener(
+"mouseover",
+escapeButton
+);
+
+function showQuestionPage(){
+
+document
+.getElementById("typing")
+.style.display="none";
+
+document
+.getElementById("continueBox")
+.style.display="none";
+
+document
+.getElementById("questionPage")
+.style.display="block";
+
+document
+.getElementById("realButtons")
+.style.display="flex";
+
+}
+
+function openPopup(){
+
+document
+.getElementById("popup")
+.style.display="flex";
+
+}
+function closePopup(){
+
+document
+.getElementById("popup")
+.style.display="none";
+
+}
+
+function openSecondPopup(){
+
+document
+.getElementById("popup")
+.style.display="none";
+
+document
+.getElementById("secondPopup")
+.style.display="flex";
+
+}
+
+function closeSecondPopup(){
+
+document
+.getElementById("secondPopup")
+.style.display="none";
+
+}
+
+function openForm(){
+
+document
+.getElementById("welcome")
+.style.display="none";
+
+document
+.getElementById("formFrame")
+.style.display="block";
+
+document.body.style.overflow="auto";
+
+}
+
+function openFormAndSwap(){
+
+openForm();
+
+const btn =
+document.getElementById("formBtn");
+
+btn.innerText =
+"☕ Quay lại";
+
+btn.className =
+"music";
+
+btn.onclick =
+closeSecondPopup;
+
+}
+
+function openFormAndSwap(){
+
+openForm();
+
+const btn =
+document.getElementById("formBtn");
+
+btn.innerText =
+"☕ Quay lại";
+
+btn.className =
+"music";
+
+btn.onclick =
+closeSecondPopup;
+
+}
+
+function playMusic(){
+
+const music = document.getElementById("bgMusic");
+
+music.volume = 0.35;
+
+music.play();
+
+}
+
+setInterval(()=>{
+
+const heart =
+document.createElement("div");
+
+heart.classList.add("heart");
+
+heart.innerHTML="💖";
+
+heart.style.left =
+Math.random()*100+"vw";
+
+heart.style.fontSize =
+(15+Math.random()*25)+"px";
+
+heart.style.animationDuration =
+(4+Math.random()*4)+"s";
+
+document.body.appendChild(heart);
+
+setTimeout(()=>{
+heart.remove();
+},8000);
+
+},300);
+
+</script>
+
+<div id="popup" style="
+display:none;
+position:fixed;
+inset:0;
+background:rgba(0,0,0,.35);
+justify-content:center;
+align-items:center;
+z-index:999;
+">
+
+<div class="popup-glass popup-scroll" style="
+padding:40px;
+border-radius:25px;
+text-align:center;
+max-width:500px;
+max-height:80vh;
+overflow-y:auto;
+">
+
+<h2 style="color:#ff5fa2;">
+Yayyyy 💖
+</h2>
+
+<p style="color:white;font-weight:600;">
+📸 Một chiếc meme của tụi mình
+</p>
+
+<img
+src="https://i.pinimg.com/736x/54/6a/28/546a286ba55695e43ff2eb2cbbe3d709.jpg"
+style="
+width:250px;
+border-radius:20px;
+margin:15px 0;
+border:4px solid #ffd6e7;
+box-shadow:0 10px 25px rgba(255,105,180,.25);
+">
+
+<p style="color:white;">
+Mình biết màaaa 🌷
+</p>
+
+<p style="white-space: nowrap;ar
+font-size:21px;
+font-weight:700;
+color:#fff;
+margin:18px 0;
+text-shadow:
+    0 0 6px rgba(255,255,255,.9),
+    0 0 14px rgba(255,105,180,.9),
+    0 0 25px rgba(255,20,147,.65);
+">Cảm ơn cậu đã đồng ý đi date với mình ✨
+</p>
+
+
+<p class="ready-text">
+☕ Ready for our date? 💕
+</p>
+
+<button
+class="yes"
+style="margin-top:15px;"
+onclick="openSecondPopup()"
+>
+Đi tiếp nè ☕
+</button>
+
+</div>
+
+</div>
+
+<div id="secondPopup" style="
+display:none;
+position:fixed;
+inset:0;
+background:rgba(0,0,0,.35);
+justify-content:center;
+align-items:center;
+z-index:1000;
+">
+
+<div class="popup-glass popup-scroll" style="
+padding:30px;
+border-radius:25px;
+width:90%;
+max-width:500px;
+max-height:70vh;
+overflow-y:auto;
+text-align:center;
+padding-right:15px;
+">
+<h2 style="color:#ff5fa2;">
+🌷 Trước khi đi tiếp...
+</h2>
+
+<div style="
+text-align:justify;
+text-justify:inter-word;
+line-height:1.9;
+margin-top:20px;
+color:white;
+">
+
+<div class="message-list">
+
+    <div class="message-line">
+        <span class="heart-icon">❤</span>
+        <p>Cảm ơn cậu đã dành thời gian xem hết cái web này nha.</p>
+    </div>
+
+    <div class="message-line">
+        <span class="heart-icon">❤</span>
+        <p>Mình biết nó hơi ngố ngố một chút...</p>
+    </div>
+
+    <div class="message-line">
+        <span class="heart-icon">❤</span>
+        <p>Nhưng mình thật sự muốn tạo một điều gì đó dễ thương cho cậu ✨</p>
+    </div>
+
+    <div class="message-line">
+        <span class="heart-icon">❤</span>
+        <p>Hy vọng chúng ta sẽ có một buổi date thật vui, ăn món ngon, nghe nhạc hay và tạo thêm thật nhiều kỷ niệm đẹp 🌷</p>
+    </div>
+
+</div>
+
+<p class="ready-text">
+ ☕💕 Ready chưa nè? ☕💕
+</p>
+
+</div>
+
+<p style="
+margin-top:15px;
+font-style:italic;
+color:rgba(255,255,255,.9);
+text-align:center;
+">
+P/s: Nếu cậu đang cười khi đọc tới đây thì mission accomplished 😌💖
+</p>
+
+<br>
+
+<br>
+
+<button
+id="formBtn"
+class="yes"
+onclick="openFormAndSwap()"
+>
+📋 Điền Form
+</button>
+
+</div>
+
+</div>
+
+</body>
+</html>
